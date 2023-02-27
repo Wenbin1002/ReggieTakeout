@@ -1,9 +1,13 @@
-package com.itheima.reggie.common;
+package com.reggie_takeout.common;
 
 import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 通用返回结果，服务端响应的数据最后都会封装成此对象
+ * @param <T>
+ */
 @Data
 public class R<T> {
 
