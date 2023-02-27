@@ -166,6 +166,7 @@
         created() {
           const userInfo = window.localStorage.getItem('userInfo')
           if (userInfo) {
+            console.log(userInfo);
             this.userInfo = JSON.parse(userInfo)
           }
           this.closeLoading()
