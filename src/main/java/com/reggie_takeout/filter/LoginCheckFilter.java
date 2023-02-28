@@ -22,7 +22,7 @@ public class LoginCheckFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String requestURI = request.getRequestURI();
-        log.info("拦截到请求: {}", requestURI);
+        //log.info("拦截到请求: {}", requestURI);
 
         String[] urls = new String[] {
                 "/employee/login",
@@ -32,17 +32,17 @@ public class LoginCheckFilter implements Filter {
         };
 
         if(check(urls,requestURI)) {
-            log.info("本次请求无需处理 {}", requestURI);
+            //log.info("本次请求无需处理 {}", requestURI);
             filterChain.doFilter(request, response);
             return;
         }
 
         if(request.getSession().getAttribute("employee") != null) {
-            log.info("用户已登录，用户id: {}", request.getSession().getAttribute("employee"));
+            //log.info("用户已登录，用户id: {}", request.getSession().getAttribute("employee"));
             filterChain.doFilter(request, response);
             return;
         }
-        log.info("用户未登录");
+        //log.info("用户未登录");
         response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
     }
 

@@ -1,16 +1,15 @@
 package com.reggie_takeout.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.reggie_takeout.common.R;
 import com.reggie_takeout.entity.Employee;
 import com.reggie_takeout.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -75,7 +74,7 @@ public class EmployeeController {
 
     @PostMapping
     public R<String> save(HttpServletRequest request, @RequestBody Employee employee) {
-        log.info("新增员工，员工信息: {}",employee.toString());
+        //log.info("新增员工，员工信息: {}",employee.toString());
 
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
 
@@ -90,5 +89,20 @@ public class EmployeeController {
         employeeService.save(employee);
 
         return R.success("新增员工成功");
+    }
+
+    @GetMapping("/page")
+    public R<Page<Employee>> pageR(int page, int pageSize, String name) {
+        //log.info("page = {}, pageSize = {}, name = {}", page, pageSize, name);
+
+        Page<Employee> pageInfo = new Page<>(page, pageSize);
+
+        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotEmpty(name), Employee::getName, name);
+        queryWrapper.orderByDesc(Employee::getUpdateTime);
+
+        employeeService.page(pageInfo,queryWrapper);
+
+        return R.success(pageInfo);
     }
 }

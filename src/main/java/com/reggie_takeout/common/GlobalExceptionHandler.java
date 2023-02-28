@@ -16,7 +16,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class GlobalExceptionHandler {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public R<String>  exceptionHandler(SQLIntegrityConstraintViolationException ex) {
-        log.error(ex.getMessage());
+        //log.error(ex.getMessage());
         
         if(ex.getMessage().contains("Duplicate entry")) {
             return R.error("Username already exists");

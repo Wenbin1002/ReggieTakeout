@@ -12,7 +12,6 @@ public class ReggieTakeoutApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ReggieTakeoutApplication.class, args);
-        log.info("hello");
     }
 
 }
