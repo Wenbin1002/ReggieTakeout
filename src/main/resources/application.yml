@@ -19,3 +19,5 @@ mybatis-plus:
     db-config:
 #id生成策略是ASSIGN_ID
       id-type: ASSIGN_ID
+reggie:
+  path: C:\Code_file\Java\SpringBoot\reggie_takeout\img\
