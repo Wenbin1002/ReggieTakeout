@@ -91,4 +91,13 @@ public class DishController {
 
         return R.success("更新菜品成功");
     }
+
+    @DeleteMapping
+    public R<String> delete(Long id) {
+
+        dishService.deleteWithFlavor(id);
+
+        return R.success("删除菜品成功");
+    }
+
 }

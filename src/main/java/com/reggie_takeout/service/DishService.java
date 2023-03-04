@@ -10,6 +10,8 @@ public interface DishService extends IService<Dish> {
 
     public void updateWithFlavor(DishDto dishDto);
 
+    public void deleteWithFlavor(Long id);
+
     public DishDto getByIdWithFlavor(Long id);
 
 }
