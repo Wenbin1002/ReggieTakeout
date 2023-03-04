@@ -35,9 +35,17 @@ public class DishController {
 
     @PostMapping
     public R<String> save(@RequestBody Dish dish) {
-        log.info(dish.toString());
         dishService.save(dish);
 
         return R.success("添加菜品成功");
+    }
+
+    @DeleteMapping()
+    public R<String> delete(Long id) {
+        log.info(id.toString());
+
+        dishService.removeById(id);
+
+        return R.success("删除菜品成功");
     }
 }
