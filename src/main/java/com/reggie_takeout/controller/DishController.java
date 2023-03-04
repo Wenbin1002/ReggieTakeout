@@ -100,4 +100,14 @@ public class DishController {
         return R.success("删除菜品成功");
     }
 
+
+    @PostMapping("status/{status}")
+    public R<String> updateState(@PathVariable int status, Long id) {
+        log.info(String.valueOf(status) + " " + id.toString());
+        Dish dish = dishService.getById(id);
+        dish.setStatus(status);
+        dishService.updateById(dish);
+
+        return R.success("菜品状态修改成功");
+    }
 }
