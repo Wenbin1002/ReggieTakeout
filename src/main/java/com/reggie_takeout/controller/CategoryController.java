@@ -59,6 +59,7 @@ public class CategoryController {
     public R<List<Category>> getList(int type) {
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Category::getType, type);
+        queryWrapper.orderByDesc(Category::getSort).orderByDesc(Category::getUpdateTime);
 
         List<Category> list = categoryService.list(queryWrapper);
 
