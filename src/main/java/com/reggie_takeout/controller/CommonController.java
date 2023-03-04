@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -38,6 +36,7 @@ public class CommonController {
 
         //原始文件名
         String originalFilename = file.getOriginalFilename();//abc.jpg
+        assert originalFilename != null;
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
 
         //使用UUID重新生成文件名，防止文件名称重复造成文件覆盖
