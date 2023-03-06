@@ -93,20 +93,23 @@ public class DishController {
     }
 
     @DeleteMapping
-    public R<String> delete(Long id) {
-
-        dishService.deleteWithFlavor(id);
+    public R<String> delete(Long[] ids) {
+        for(Long id : ids) {
+            dishService.deleteWithFlavor(id);
+        }
 
         return R.success("删除菜品成功");
     }
 
 
     @PostMapping("status/{status}")
-    public R<String> updateState(@PathVariable int status, Long id) {
-        log.info(String.valueOf(status) + " " + id.toString());
-        Dish dish = dishService.getById(id);
-        dish.setStatus(status);
-        dishService.updateById(dish);
+    public R<String> updateState(@PathVariable int status, Long[] ids) {
+
+        for(Long id : ids) {
+            Dish dish = dishService.getById(id);
+            dish.setStatus(status);
+            dishService.updateById(dish);
+        }
 
         return R.success("菜品状态修改成功");
     }
