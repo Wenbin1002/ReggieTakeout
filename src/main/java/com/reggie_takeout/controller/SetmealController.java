@@ -100,4 +100,16 @@ public class SetmealController {
 
         return R.success("删除套餐成功");
     }
+
+    @PostMapping("status/{status}")
+    public R<String> changeStatus(@PathVariable int status, Long[] ids) {
+
+        for(Long id : ids) {
+            Setmeal setmeal = setmealService.getById(id);
+            setmeal.setStatus(status);
+            setmealService.updateById(setmeal);
+        }
+
+        return R.success("套餐状态更改成功");
+    }
 }
