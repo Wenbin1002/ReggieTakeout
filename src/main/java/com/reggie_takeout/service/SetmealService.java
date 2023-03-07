@@ -9,5 +9,7 @@ public interface SetmealService extends IService<Setmeal> {
 
     public void updateWithDishes(SetmealDto setmealDto);
 
+    public void deleteWithDishes(Long id);
+
     public SetmealDto getByIdWithDishes(Long id);
 }

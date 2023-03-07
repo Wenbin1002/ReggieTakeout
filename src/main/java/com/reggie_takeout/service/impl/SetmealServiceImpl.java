@@ -51,6 +51,16 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
     }
 
     @Override
+    public void deleteWithDishes(Long id) {
+
+        this.removeById(id);
+
+        LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SetmealDish::getSetmealId, id);
+        setmealDishService.removeById(id);
+    }
+
+    @Override
     public SetmealDto getByIdWithDishes(Long id) {
 
         Setmeal setmeal = this.getById(id);

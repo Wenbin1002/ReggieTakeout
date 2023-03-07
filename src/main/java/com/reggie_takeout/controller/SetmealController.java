@@ -3,10 +3,8 @@ package com.reggie_takeout.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.reggie_takeout.common.R;
-import com.reggie_takeout.dto.DishDto;
 import com.reggie_takeout.dto.SetmealDto;
 import com.reggie_takeout.entity.Category;
-import com.reggie_takeout.entity.Dish;
 import com.reggie_takeout.entity.Setmeal;
 import com.reggie_takeout.service.CategoryService;
 import com.reggie_takeout.service.SetmealService;
@@ -91,5 +89,15 @@ public class SetmealController {
         setmealService.updateWithDishes(setmealDto);
 
         return R.success("修改套餐成功");
+    }
+
+    @DeleteMapping
+    public R<String> delete(Long[] ids) {
+
+        for(Long id : ids) {
+            setmealService.deleteWithDishes(id);
+        }
+
+        return R.success("删除套餐成功");
     }
 }
