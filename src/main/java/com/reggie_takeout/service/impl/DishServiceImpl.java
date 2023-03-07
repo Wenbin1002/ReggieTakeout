@@ -71,7 +71,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
     @Override
     public DishDto getByIdWithFlavor(Long id) {
 
-        Dish dish = dishService.getById(id);
+        Dish dish = this.getById(id);
         DishDto dishDto = new DishDto();
 
         BeanUtils.copyProperties(dish, dishDto);

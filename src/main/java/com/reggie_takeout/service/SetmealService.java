@@ -6,4 +6,8 @@ import com.reggie_takeout.entity.Setmeal;
 
 public interface SetmealService extends IService<Setmeal> {
     public void saveWithDishes(SetmealDto setmealDto);
+
+    public void updateWithDishes(SetmealDto setmealDto);
+
+    public SetmealDto getByIdWithDishes(Long id);
 }
