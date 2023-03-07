@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.reggie_takeout.common.CustomException;
 import com.reggie_takeout.entity.Category;
 import com.reggie_takeout.entity.Dish;
-import com.reggie_takeout.entity.SetMeal;
+import com.reggie_takeout.entity.Setmeal;
 import com.reggie_takeout.mapper.CategoryMapper;
 import com.reggie_takeout.service.CategoryService;
 import com.reggie_takeout.service.DishService;
@@ -19,7 +19,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     private DishService dishService;
 
     @Autowired
-    private SetMealServiceImpl setMealService;
+    private SetmealServiceImpl setMealService;
 
     @Override
     public void remove(Long id) {
@@ -32,9 +32,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
             throw new CustomException("当前分类下关联了菜品，不能删除");
         }
 
-        LambdaQueryWrapper<SetMeal> setMealLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Setmeal> setMealLambdaQueryWrapper = new LambdaQueryWrapper<>();
 
-        setMealLambdaQueryWrapper.eq(SetMeal::getCategoryId, id);
+        setMealLambdaQueryWrapper.eq(Setmeal::getCategoryId, id);
 
         int cnt2 = (int) setMealService.count(setMealLambdaQueryWrapper);
 

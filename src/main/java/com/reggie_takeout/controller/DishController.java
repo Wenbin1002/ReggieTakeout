@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -112,5 +113,20 @@ public class DishController {
         }
 
         return R.success("菜品状态修改成功");
+    }
+
+    @GetMapping("/list")
+    public R<List<Dish>> getList(Long categoryId, String name) {
+
+        List<Dish> dishList = new ArrayList<>();
+
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+
+        if(categoryId != null) queryWrapper.eq(Dish::getCategoryId, categoryId);
+        if(name != null) queryWrapper.eq(Dish::getName, name);
+
+        dishList = dishService.list(queryWrapper);
+
+        return R.success(dishList);
     }
 }
